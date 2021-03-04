@@ -1,9 +1,17 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+
+import initialEvents from './events';
+import SalesmanCalendar from './SalesmanCalendar';
+
 import './App.css';
 
-function App() {
+const App = () => {
+  const [events, setEvents] = useState(initialEvents);
+
   return (
     <div className="App">
+      <h1>This is a test</h1>
+      <SalesmanCalendar events={events} />
     </div>
   );
 }
