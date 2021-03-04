@@ -4,7 +4,6 @@ import initialEvents from '../../Salesman/events';
 import SalesmanCalendar from '../../shared/components/SalesmanCalendar';
 import ModalOverlay from '../../shared/components/OverlayModal';
 import EventForm from './EventFrom';
-import { randomString } from '../../shared/utils/strings.util';
 
 const ManageEvents = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -18,13 +17,20 @@ const ManageEvents = () => {
     setSelectedEvent(null);
   };
 
-  useEffect(() => console.log(events), [events]);
-
   const handleSubmit = (newEvent) => {
-    setEvents([
-      ...events,
-      newEvent,
-    ]);
+    if (selectedEvent) {
+      console.log(newEvent);
+      setEvents([
+        ...events.filter(e => e.id !== newEvent.id),
+        newEvent
+      ]);
+    } else {
+      setEvents([
+        ...events,
+        newEvent,
+      ]);
+    }
+
 
     closeModal();
   }

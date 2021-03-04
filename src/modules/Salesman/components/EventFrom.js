@@ -18,11 +18,11 @@ const EventForm = ({ event, onSubmit }) => {
     }
   }, [event]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
     const newEvent = {
-      id: randomString(),
+      id: event.id || randomString(),
       title,
       allDay,
       start: new Date(start),
