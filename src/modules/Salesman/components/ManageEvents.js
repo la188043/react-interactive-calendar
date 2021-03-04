@@ -13,7 +13,10 @@ const ManageEvents = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedEvent(null);
+  };
 
   useEffect(() => console.log(events), [events]);
 

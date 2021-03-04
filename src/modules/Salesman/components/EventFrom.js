@@ -13,8 +13,8 @@ const EventForm = ({ event, onSubmit }) => {
     if (event) {
       setTitle(event.title);
       setAllDay(event.allDay);
-      setStart(event.start);
-      setEnd(event.end);
+      setStart(toDatelocalString(event.start));
+      setEnd(toDatelocalString(event.end));
     }
   }, [event]);
 
@@ -67,7 +67,7 @@ const EventForm = ({ event, onSubmit }) => {
           type="checkbox"
           id="allDay"
           name="allDay"
-          value={allDay}
+          checked={allDay}
           onChange={(e) => setAllDay(e.target.checked)}
         />
 
