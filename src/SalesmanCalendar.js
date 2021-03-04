@@ -1,13 +1,14 @@
-import { Calendar, Views, dateFnsLocalizer } from "react-big-calendar";
+import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import format from "date-fns/format";
 import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
 
+import "date-fns/locale/fr";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const locales = {
-  fr: require("date-fns/locale/fr")
+  'fr': require("date-fns/locale/fr")
 };
 
 const localizer = dateFnsLocalizer({
@@ -18,17 +19,50 @@ const localizer = dateFnsLocalizer({
   locales
 });
 
-const views = Object.keys(Views).map((k) => Views[k]);
+const formats = {
+  timeGutterFormat: (date, culture, localizer) => localizer.format(date, 'HH:mm', culture),
+  eventTimeRangeFormat: ({ start, end }, culture, localizer) => {
+    const s = localizer.format(start, 'HH:mm', culture);
+    const e = localizer.format(end, 'HH:mm', culture);
+
+    return `${s} - ${e}`;
+  },
+  agendaTimeFormat: ({ start, end }, culture, localizer) => {
+    const s = localizer.format(start, 'HH:mm', culture);
+    const e = localizer.format(end, 'HH:mm', culture);
+
+    return `${s} - ${e}`;
+  },
+  dayRangeHeaderFormat: ({ start, end }, culture, localizer) => {
+    const s = localizer.format(start, 'MMM dd', culture);
+    const e = localizer.format(end, 'MMM dd', culture);
+
+    return `${s} - ${e}`;
+  },
+}
+
+const messages = {
+  today: 'Aujourd\'hui',
+  previous: 'Précédent',
+  next: 'Suivant',
+  month: 'Mois',
+  week: 'Semaine',
+  day: 'Jour',
+  agenda: 'Planning',
+};
 
 const SalesmanCalender = ({ events }) => (
   <div>
     <Calendar
       localizer={localizer}
       events={events}
-      step={60}
-      views={views}
-      style={{ height: 500 }}
-      defaultDate={new Date()}
+      defaultView="week"
+      startAccessor="start"
+      endAccessor="end"
+      culture="fr"
+      formats={formats}
+      messages={messages}
+      style={{ minHeight: '90vh' }}
     />
   </div>
 );
