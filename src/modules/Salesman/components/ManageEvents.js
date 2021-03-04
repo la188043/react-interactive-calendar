@@ -4,6 +4,7 @@ import initialEvents from '../../Salesman/events';
 import SalesmanCalendar from '../../shared/components/SalesmanCalendar';
 import ModalOverlay from '../../shared/components/OverlayModal';
 import EventForm from './EventFrom';
+import { randomString } from '../../shared/utils/strings.util';
 
 const ManageEvents = () => {
   const [isModalOpen, setModalOpen] = useState(false);

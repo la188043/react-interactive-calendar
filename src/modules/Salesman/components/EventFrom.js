@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { randomString } from '../../shared/utils/strings.util';
 
 const EventForm = ({ event, onSubmit }) => {
   const toDatelocalString = (date) => date.toISOString().substring(0, 16);
@@ -21,6 +22,7 @@ const EventForm = ({ event, onSubmit }) => {
     event.preventDefault();
 
     const newEvent = {
+      id: randomString(),
       title,
       allDay,
       start: new Date(start),
