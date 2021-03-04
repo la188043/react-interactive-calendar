@@ -22,7 +22,7 @@ const EventForm = ({ event, onSubmit }) => {
     e.preventDefault();
 
     const newEvent = {
-      id: event.id || randomString(),
+      id: event?.id || randomString(),
       title,
       allDay,
       start: new Date(start),
