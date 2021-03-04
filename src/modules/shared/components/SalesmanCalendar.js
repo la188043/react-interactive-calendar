@@ -4,7 +4,6 @@ import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
 
-import "date-fns/locale/fr";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const locales = {
@@ -19,27 +18,29 @@ const localizer = dateFnsLocalizer({
   locales
 });
 
-const formats = {
-  timeGutterFormat: (date, culture, localizer) => localizer.format(date, 'HH:mm', culture),
-  eventTimeRangeFormat: ({ start, end }, culture, localizer) => {
-    const s = localizer.format(start, 'HH:mm', culture);
-    const e = localizer.format(end, 'HH:mm', culture);
-
-    return `${s} - ${e}`;
-  },
-  agendaTimeFormat: ({ start, end }, culture, localizer) => {
-    const s = localizer.format(start, 'HH:mm', culture);
-    const e = localizer.format(end, 'HH:mm', culture);
-
-    return `${s} - ${e}`;
-  },
-  dayRangeHeaderFormat: ({ start, end }, culture, localizer) => {
-    const s = localizer.format(start, 'MMM dd', culture);
-    const e = localizer.format(end, 'MMM dd', culture);
-
-    return `${s} - ${e}`;
-  },
-}
+/**
+  const formats = {
+    timeGutterFormat: (date, culture, localizer) => localizer.format(date, 'HH:mm', culture),
+    eventTimeRangeFormat: ({ start, end }, culture, localizer) => {
+      const s = localizer.format(start, 'HH:mm', culture);
+      const e = localizer.format(end, 'HH:mm', culture);
+  
+      return `${s} - ${e}`;
+    },
+    agendaTimeFormat: ({ start, end }, culture, localizer) => {
+      const s = localizer.format(start, 'HH:mm', culture);
+      const e = localizer.format(end, 'HH:mm', culture);
+  
+      return `${s} - ${e}`;
+    },
+    dayRangeHeaderFormat: ({ start, end }, culture, localizer) => {
+      const s = localizer.format(start, 'MMM dd', culture);
+      const e = localizer.format(end, 'MMM dd', culture);
+  
+      return `${s} - ${e}`;
+    },
+  }
+*/
 
 const messages = {
   today: 'Aujourd\'hui',
@@ -60,7 +61,6 @@ const SalesmanCalender = ({ events }) => (
       startAccessor="start"
       endAccessor="end"
       culture="fr"
-      formats={formats}
       messages={messages}
       style={{ minHeight: '90vh' }}
     />

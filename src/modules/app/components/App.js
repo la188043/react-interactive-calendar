@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import initialEvents from './events';
-import SalesmanCalendar from './SalesmanCalendar';
+import initialEvents from '../../Salesman/events';
+import SalesmanCalendar from '../../shared/components/SalesmanCalendar';
 
 import './App.css';
 
