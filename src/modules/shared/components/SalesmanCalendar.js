@@ -52,7 +52,7 @@ const messages = {
   agenda: 'Planning',
 };
 
-const SalesmanCalender = ({ events }) => (
+const SalesmanCalender = ({ events, onDbClickOnEvent }) => (
   <div>
     <Calendar
       localizer={localizer}
@@ -62,6 +62,7 @@ const SalesmanCalender = ({ events }) => (
       endAccessor="end"
       culture="fr"
       messages={messages}
+      onDoubleClickEvent={onDbClickOnEvent}
       style={{ minHeight: '90vh' }}
     />
   </div>

@@ -26,6 +26,11 @@ const ManageEvents = () => {
     closeModal();
   }
 
+  const handleDbClickOnEvent = (event) => {
+    setSelectedEvent(event);
+    openModal();
+  }
+
   return (
     <div>
       {isModalOpen && (
@@ -48,7 +53,10 @@ const ManageEvents = () => {
       >
         Ajouter
       </button>
-      <SalesmanCalendar events={events} />
+      <SalesmanCalendar
+        events={events}
+        onDbClickOnEvent={handleDbClickOnEvent}
+      />
     </div>
   );
 };
