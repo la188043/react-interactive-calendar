@@ -1,61 +1,84 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const EventForm = ({ event, onSubmit }) => {
-  const initialFormValues = {
-    title: event.title || '',
-    allDay: event.allDay || false,
-    start: event.start || new Date(),
-    end: event.end || new Date(),
-  };
+  const toDatelocalString = (date) => date.toISOString().substring(0, 16);
 
-  const [formData, setFormData] = useState(initialFormValues);
+  const [title, setTitle] = useState('');
+  const [allDay, setAllDay] = useState(false);
+  const [start, setStart] = useState(toDatelocalString(new Date()));
+  const [end, setEnd] = useState(toDatelocalString(new Date()));
 
-  const handleChange = (event) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    })
-  };
+  useEffect(() => {
+    if (event) {
+      setTitle(event.title);
+      setAllDay(event.allDay);
+      setStart(event.start);
+      setEnd(event.end);
+    }
+  }, [event]);
 
   const handleSubmit = (event) => {
-    console.log(formData);
+    event.preventDefault();
+
+    const newEvent = {
+      title,
+      allDay,
+      start: new Date(start),
+      end: new Date(end),
+    };
+
+    onSubmit(newEvent);
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="title"
-        placeholder="Titre de l'évènement"
-        value={formData.title}
-        onChange={handleChange}
-      />
+      <div>
+        <input
+          type="text"
+          name="title"
+          placeholder="Titre de l'évènement"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
 
-      <input
-        type="datetime-local"
-        name="start"
-        value={formData.start}
-        onChange={handleChange}
-      />
+      <div>
+        <input
+          type="datetime-local"
+          name="start"
+          value={start}
+          onChange={(e) => setStart(e.target.value)}
+        />
+      </div>
 
-      <input
-        type="datetime-local"
-        name="end"
-        value={formData.end}
-        onChange={handleChange}
-      />
+      <div>
+        <input
+          type="datetime-local"
+          name="end"
+          value={end}
+          onChange={(e) => setEnd(e.target.value)}
+        />
+      </div>
 
-      <input
-        type="checkbox"
-        name="allDay"
-        value={formData.allDay}
-        onChange={handleChange}
-      />
+      <div>
+        <input
+          type="checkbox"
+          id="allDay"
+          name="allDay"
+          value={allDay}
+          onChange={(e) => setAllDay(e.target.checked)}
+        />
+
+        <label htmlFor="allDay">Toute la journée ?</label>
+      </div>
+
 
       <button
         type="submit"
         value={event ? 'Modifier' : 'Ajouter'}
-      ></button>
+      >{event ? 'Modifier' : 'Ajouter'}</button>
     </form>
   )
 }
+
+export default EventForm;
