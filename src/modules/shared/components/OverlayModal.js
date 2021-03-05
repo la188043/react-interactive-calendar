@@ -2,6 +2,9 @@ import React from 'react';
 import Modal from 'react-modal';
 
 const modalStyle = {
+  overlay: {
+    zIndex: 999,
+  },
   content: {
     top: '50%',
     left: '50%',
