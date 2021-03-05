@@ -13,6 +13,11 @@ const EventForm = ({ event, onSubmit }) => {
   const [start, setStart] = useState(toDatelocalString(new Date()));
   const [end, setEnd] = useState(defaultEndDate(new Date()));
 
+  const handleStartDateChange = (e) => {
+    setStart(e.target.value);
+    setEnd(defaultEndDate(new Date(e.target.value), 30));
+  }
+
   useEffect(() => {
     if (event) {
       setTitle(event.title);
@@ -53,7 +58,7 @@ const EventForm = ({ event, onSubmit }) => {
           type="datetime-local"
           name="start"
           value={start || toDatelocalString(new Date())}
-          onChange={(e) => setStart(e.target.value)}
+          onChange={handleStartDateChange}
         />
       </div>
 
