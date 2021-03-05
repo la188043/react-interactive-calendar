@@ -15,7 +15,9 @@ const EventForm = ({ event, onSubmit }) => {
 
   const handleStartDateChange = (e) => {
     setStart(e.target.value);
-    setEnd(defaultEndDate(new Date(e.target.value), 30));
+    if (!event) {
+      setEnd(defaultEndDate(new Date(e.target.value)));
+    }
   }
 
   useEffect(() => {
