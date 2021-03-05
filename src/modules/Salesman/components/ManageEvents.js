@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import initialEvents from '../../Salesman/events';
 import SalesmanCalendar from '../../shared/components/SalesmanCalendar';
