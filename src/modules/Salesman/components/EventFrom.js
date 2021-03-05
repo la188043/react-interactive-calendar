@@ -42,7 +42,7 @@ const EventForm = ({ event, onSubmit }) => {
           type="text"
           name="title"
           placeholder="Titre de l'évènement"
-          value={title}
+          value={title || ''}
           onChange={(e) => setTitle(e.target.value)}
         />
       </div>
@@ -51,7 +51,7 @@ const EventForm = ({ event, onSubmit }) => {
         <input
           type="datetime-local"
           name="start"
-          value={start}
+          value={start || toDatelocalString(new Date())}
           onChange={(e) => setStart(e.target.value)}
         />
       </div>
@@ -60,7 +60,7 @@ const EventForm = ({ event, onSubmit }) => {
         <input
           type="datetime-local"
           name="end"
-          value={end}
+          value={end || toDatelocalString(new Date())}
           onChange={(e) => setEnd(e.target.value)}
         />
       </div>
@@ -70,7 +70,7 @@ const EventForm = ({ event, onSubmit }) => {
           type="checkbox"
           id="allDay"
           name="allDay"
-          checked={allDay}
+          checked={allDay || false}
           onChange={(e) => setAllDay(e.target.checked)}
         />
 
