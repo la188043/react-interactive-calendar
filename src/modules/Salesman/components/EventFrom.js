@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { format } from 'date-fns';
+import { format, addMinutes } from 'date-fns';
 import { fr } from 'date-fns/locale';
 
 import { randomString } from '../../shared/utils/strings.util';
 
 const EventForm = ({ event, onSubmit }) => {
   const toDatelocalString = (date) => format(date, "yyyy-MM-dd'T'HH:mm", { locale: fr });
+  const defaultEndDate = (date) => toDatelocalString(addMinutes(date, 30));
 
   const [title, setTitle] = useState('');
   const [allDay, setAllDay] = useState(false);
   const [start, setStart] = useState(toDatelocalString(new Date()));
-  const [end, setEnd] = useState(toDatelocalString(new Date()));
+  const [end, setEnd] = useState(defaultEndDate(new Date()));
 
   useEffect(() => {
     if (event) {
@@ -60,7 +61,7 @@ const EventForm = ({ event, onSubmit }) => {
         <input
           type="datetime-local"
           name="end"
-          value={end || toDatelocalString(new Date())}
+          value={end || defaultEndDate(new Date())}
           onChange={(e) => setEnd(e.target.value)}
         />
       </div>
